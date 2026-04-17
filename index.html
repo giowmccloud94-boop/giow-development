@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>giowdev | Desarrollo web moderno</title>
+  <meta name="description" content="Desarrollo páginas web modernas para negocios que quieren más clientes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --bg-soft: #141414;
+      --card: #171717;
+      --text: #f5f5f5;
+      --muted: #b3b3b3;
+      --line: #262626;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --max-width: 1150px;
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #0b0b0b 0%, #10131a 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-header {
+      max-width: 680px;
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 11, 11, 0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: var(--text);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 96px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .hero-copy p {
+      max-width: 640px;
+      font-size: 1.08rem;
+      margin-top: 20px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(59,130,246,0.15), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .code-window {
+      background: #0f172a;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      gap: 8px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .code-body {
+      padding: 22px;
+      font-size: 0.95rem;
+      color: #dbeafe;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 28px;
+      border-radius: var(--radius);
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59,130,246,0.5);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(59,130,246,0.12);
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .project-visual {
+      min-height: 210px;
+      padding: 26px;
+      display: flex;
+      align-items: end;
+      background: linear-gradient(135deg, #1d4ed8, #0f172a);
+    }
+
+    .project:nth-child(2) .project-visual {
+      background: linear-gradient(135deg, #111827, #1f2937);
+    }
+
+    .project:nth-child(3) .project-visual {
+      background: linear-gradient(135deg, #0f172a, #14532d);
+    }
+
+    .project-visual span {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      color: #e5e7eb;
+      font-weight: 700;
+    }
+
+    .project-content {
+      padding: 24px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+      font-weight: 700;
+    }
+
+    .project-links a {
+      color: var(--primary);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(59,130,246,0.14);
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .about-box,
+    .contact-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 34px;
+    }
+
+    .about-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 16px 18px;
+      border-radius: 16px;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .cards,
+      .portfolio-grid,
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: rgba(11,11,11,0.97);
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        padding: 18px 1rem 24px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .cards,
+      .portfolio-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#inicio" class="brand">giow<span>dev</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#servicios">Servicios</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Desarrollo web freelance</span>
+          <h1>Creo páginas web modernas para negocios que quieren más clientes.</h1>
+          <p>
+            Diseño y desarrollo sitios rápidos, atractivos y enfocados en conversión.
+            Si necesitas una landing page, una web corporativa o renovar tu presencia digital,
+            te ayudo a llevar tu negocio a una imagen más profesional.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#contacto">Solicitar mi página web</a>
+            <a class="btn btn-secondary" href="#portafolio">Ver proyectos</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="code-window">
+            <div class="code-header">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="code-body">
+              &lt;section class="hero"&gt;<br>
+              &nbsp;&nbsp;&lt;h1&gt;Tu negocio merece una web mejor&lt;/h1&gt;<br>
+              &nbsp;&nbsp;&lt;p&gt;Diseño moderno + enfoque en resultados&lt;/p&gt;<br>
+              &nbsp;&nbsp;&lt;a&gt;Reservar proyecto&lt;/a&gt;<br>
+              &lt;/section&gt;
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>100%</strong>
+              <p>Diseño responsive para móvil, tablet y desktop.</p>
+            </div>
+            <div class="stat">
+              <strong>+Velocidad</strong>
+              <p>Estructuras ligeras para una mejor experiencia.</p>
+            </div>
+            <div class="stat">
+              <strong>+Imagen</strong>
+              <p>Una presencia digital más profesional para tu negocio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Servicios</span>
+          <h2>Soluciones web claras, modernas y enfocadas en conversión.</h2>
+          <p>
+            Trabajo en sitios pensados para presentar mejor tu negocio, destacar tus servicios y facilitar el contacto con tus clientes.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Landing Pages</h3>
+            <p>Páginas de una sola sección o estructura compacta para promociones, marcas personales y negocios locales.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🏢</div>
+            <h3>Web para negocios</h3>
+            <p>Sitios profesionales para barberías, restaurantes, tiendas, servicios y otros negocios que quieren verse mejor online.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">♻️</div>
+            <h3>Rediseño web</h3>
+            <p>Mejora visual y estructural para páginas antiguas, lentas o que no transmiten confianza a tus clientes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="portafolio">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Portafolio</span>
+          <h2>Proyectos diseñados para comunicar mejor y vender mejor.</h2>
+          <p>
+            Aquí puedes mostrar tus trabajos reales, demos o conceptos. Ya te dejé una estructura inicial lista para que la reemplaces con tus enlaces finales.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="project">
+            <div class="project-visual">
+              <span>Proyecto destacado</span>
+            </div>
+            <div class="project-content">
+              <h3>Spiral Barbershop</h3>
+              <p>Landing page para barbería con enfoque visual moderno, servicios, galería y llamada a la acción para reservas.</p>
+              <div class="project-links">
+                <a href="https://giowmccloud94-boop.github.io/spiral-barbershop-/" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-visual">
+              <span>Demo de negocio local</span>
+            </div>
+            <div class="project-content">
+              <h3>Sabor Urbano</h3>
+              <p>Landing page para restaurante con enfoque en menú, branding urbano y llamada a la acción para pedidos o reservas.</p>
+              <div class="project-links">
+                <a href="https://giowmccloud94-boop.github.io/sabor-urbano/" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-visual">
+              <span>Concepto freelance</span>
+            </div>
+            <div class="project-content">
+              <h3>Proyecto personalizado</h3>
+              <p>Diseño adaptable a distintos sectores con enfoque en claridad, confianza y una mejor presencia digital.</p>
+              <div class="project-links">
+                <a href="#contacto">Hablemos de tu proyecto</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proceso">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Proceso</span>
+          <h2>Así trabajo cada proyecto web.</h2>
+          <p>
+            Un proceso simple ayuda a que el cliente entienda qué sigue, cuánto valor recibe y por qué es fácil trabajar contigo.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3>Contacto inicial</h3>
+            <p>Hablamos sobre tu negocio, tu objetivo y el tipo de página que necesitas.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3>Diseño y estructura</h3>
+            <p>Organizo las secciones, el estilo visual y el mensaje principal de la página.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3>Desarrollo</h3>
+            <p>Construyo el sitio con una interfaz moderna, adaptable y optimizada para distintos dispositivos.</p>
+          </article>
+
+          <article class="step">
+            <div class="step-number">4</div>
+            <h3>Entrega</h3>
+            <p>Publicación, revisión final y puesta en marcha para que tu web esté lista para mostrarse al mundo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre-mi">
+      <div class="container">
+        <div class="about-box">
+          <div class="about-grid">
+            <div>
+              <span class="eyebrow">Sobre mí</span>
+              <h2>Desarrollo web con enfoque visual y práctico.</h2>
+            </div>
+            <div>
+              <p>
+                Soy el creador de giowdev. Trabajo en páginas web modernas para marcas personales, negocios locales y proyectos que necesitan una mejor presencia online. Mi objetivo es construir sitios claros, atractivos y funcionales que ayuden a transmitir profesionalismo y generar más oportunidades.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact-box">
+          <div class="contact-grid">
+            <div>
+              <span class="eyebrow">Contacto</span>
+              <h2>¿Listo para llevar tu negocio a una mejor web?</h2>
+              <p>
+                Si quieres una página moderna para presentar mejor tus servicios, escríbeme y hablamos de tu proyecto.
+              </p>
+              <div class="btn-group">
+                <a class="btn btn-primary" href="https://wa.me/12729006527" target="_blank" rel="noopener noreferrer">Escribirme por WhatsApp</a>
+                <a class="btn btn-secondary" href="mailto:giowmccloud94@gmail.com">Enviar email</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>Email</strong>
+                  <span>giowmccloud94@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                  <strong>WhatsApp</strong>
+                  <span>+1 (272) 900-6527</span>
+                </div>
+                <div class="contact-item">
+                  <strong>Servicio</strong>
+                  <span>Landing pages, sitios para negocios y rediseño web</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="precios">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Precios</span>
+          <h2>Planes accesibles para negocios en Latinoamérica.</h2>
+          <p>Precios pensados para mercados como México, Colombia y Argentina, con enfoque en calidad y resultados.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">💻</div>
+            <h3>Landing Page</h3>
+            <p>Página de una sola sección ideal para promociones o negocios pequeños.</p>
+            <p><strong>Desde $100 USD</strong></p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">🏢</div>
+            <h3>Web para negocio</h3>
+            <p>Sitio completo con varias secciones para presentar tu empresa o servicios.</p>
+            <p><strong>Desde $150 USD</strong></p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Web personalizada</h3>
+            <p>Proyecto a medida con diseño único según las necesidades de tu negocio.</p>
+            <p><strong>Desde $200 USD</strong></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> giowdev. Todos los derechos reservados.</p>
+      <p>Desarrollo web moderno para negocios y marcas personales.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
