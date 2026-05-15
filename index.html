@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GiowDev Technologies - Desarrollo Full Stack, software, páginas web, ciberseguridad, automatización e infraestructura tecnológica." />
+  <meta name="keywords" content="desarrollo web, full stack, programación, software, ciberseguridad, automatización, tecnología, GiowDev Technologies" />
+  <meta name="author" content="GiowDev Technologies" />
+  <title>GiowDev Technologies | Full Stack Development & IT Solutions</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1024;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f8fafc;
+      --muted: #aab3c5;
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --accent: #8b5cf6;
+      --success: #22c55e;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 32%),
+                  radial-gradient(circle at top right, rgba(139, 92, 246, 0.16), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 8, 22, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary) !important;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 92px 0 70px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 16px var(--success);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff, #38bdf8 45%, #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #00111d;
+      box-shadow: 0 16px 36px rgba(56, 189, 248, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 46px rgba(56, 189, 248, 0.32);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--card-border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .tech-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.34), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .code-window {
+      position: relative;
+      background: rgba(2, 6, 23, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .window-top {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .circle:nth-child(2) { background: #f59e0b; }
+    .circle:nth-child(3) { background: #22c55e; }
+
+    pre {
+      padding: 22px;
+      color: #c4b5fd;
+      font-size: 0.92rem;
+      overflow-x: auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 44px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .about-box {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(139, 92, 246, 0.1));
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-box p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .check-item b {
+      color: var(--text);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 26px;
+      transition: 0.25s ease;
+      min-height: 255px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .service-card li {
+      margin-bottom: 8px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .tech-pill {
+      padding: 11px 16px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      counter-reset: step;
+    }
+
+    .process-card {
+      counter-increment: step;
+      position: relative;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .process-card::before {
+      content: counter(step, decimal-leading-zero);
+      display: inline-flex;
+      margin-bottom: 16px;
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 1.8rem;
+    }
+
+    .process-card p {
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .portfolio-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: 0.25s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .portfolio-img {
+      min-height: 180px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(139, 92, 246, 0.3)),
+                  linear-gradient(45deg, #111827, #020617);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.8);
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .portfolio-content {
+      padding: 22px;
+    }
+
+    .portfolio-content p {
+      color: var(--muted);
+      margin: 8px 0 16px;
+    }
+
+    .portfolio-content a {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .cta {
+      padding: 70px 0 92px;
+    }
+
+    .cta-box {
+      text-align: center;
+      border-radius: 32px;
+      padding: 50px 28px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.2));
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto 28px;
+      font-size: 1.08rem;
+    }
+
+    footer {
+      background: rgba(2, 6, 23, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 0;
+      color: var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .about-box {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .process-grid,
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 76px;
+        right: 4%;
+        left: 4%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(5, 8, 22, 0.96);
+        border: 1px solid var(--card-border);
+        border-radius: 18px;
+        overflow: hidden;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-cta {
+        border-radius: 0;
+        border: none;
+      }
+
+      .hero {
+        padding-top: 62px;
+      }
+
+      .services-grid,
+      .process-grid,
+      .portfolio-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .about-box,
+      .tech-card,
+      .cta-box {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container navbar">
+      <a href="#inicio" class="logo" aria-label="GiowDev Technologies">
+        <div class="logo-mark">G</div>
+        <div class="logo-text">
+          GiowDev
+          <span>Technologies</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#tecnologias">Tecnologías</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#contacto" class="nav-cta">Cotizar Proyecto</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="badge"><span class="badge-dot"></span> Full Stack Development & IT Solutions</div>
+          <h1>Soluciones tecnológicas para negocios modernos.</h1>
+          <p>
+            En <strong>GiowDev Technologies</strong> desarrollamos páginas web, software, sistemas, automatizaciones, soluciones de ciberseguridad e infraestructura digital para empresas, emprendedores y profesionales.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/12729006527" target="_blank" rel="noopener">Solicitar cotización</a>
+            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="code-window">
+            <div class="window-top">
+              <span class="circle"></span>
+              <span class="circle"></span>
+              <span class="circle"></span>
+            </div>
+            <pre><code>const GiowDev = {
+  brand: "GiowDev Technologies",
+  services: [
+    "Web Development",
+    "Software Development",
+    "Cybersecurity",
+    "Automation",
+    "IT Infrastructure"
+  ],
+  mission: "Build smart digital solutions"
+};</code></pre>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>360°</strong>
+              <span>Soluciones IT</span>
+            </div>
+            <div class="stat">
+              <strong>Full</strong>
+              <span>Stack</span>
+            </div>
+            <div class="stat">
+              <strong>Web</strong>
+              <span>Software & Security</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Una desarrolladora tecnológica con visión integral.</h2>
+          <p>Diseñamos, programamos y optimizamos soluciones digitales pensadas para crecer con tu negocio.</p>
+        </div>
+
+        <div class="about-box reveal">
+          <div>
+            <p>
+              <strong>GiowDev Technologies</strong> nace con el propósito de ofrecer servicios tecnológicos completos, desde una página web profesional hasta sistemas personalizados, automatizaciones, seguridad digital e infraestructura.
+            </p>
+            <p>
+              Nuestro enfoque combina desarrollo full stack, pensamiento estratégico y soluciones prácticas para que cada proyecto tenga una base sólida, moderna y escalable.
+            </p>
+          </div>
+
+          <div class="check-list">
+            <div class="check-item">✅ <span><b>Desarrollo completo:</b> frontend, backend, bases de datos y despliegue.</span></div>
+            <div class="check-item">✅ <span><b>Soluciones a medida:</b> proyectos adaptados a cada negocio.</span></div>
+            <div class="check-item">✅ <span><b>Seguridad y rendimiento:</b> páginas rápidas, protegidas y optimizadas.</span></div>
+            <div class="check-item">✅ <span><b>Soporte tecnológico:</b> mantenimiento, mejoras y asistencia técnica.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Servicios principales</h2>
+          <p>Todo tipo de desarrollo e informática para llevar tu proyecto al siguiente nivel.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="icon">💻</div>
+            <h3>Desarrollo Web</h3>
+            <p>Sitios modernos, rápidos y adaptados a celulares, tablets y computadoras.</p>
+            <ul>
+              <li>• Landing pages</li>
+              <li>• Sitios corporativos</li>
+              <li>• Tiendas online</li>
+              <li>• Paneles administrativos</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="icon">⚙️</div>
+            <h3>Software & Programación</h3>
+            <p>Desarrollo de herramientas digitales y sistemas personalizados.</p>
+            <ul>
+              <li>• Aplicaciones web</li>
+              <li>• Sistemas empresariales</li>
+              <li>• APIs</li>
+              <li>• Bases de datos</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="icon">🛡️</div>
+            <h3>Ciberseguridad</h3>
+            <p>Protección básica y buenas prácticas para sitios, sistemas y servidores.</p>
+            <ul>
+              <li>• Seguridad web</li>
+              <li>• Configuración segura</li>
+              <li>• Revisión de vulnerabilidades</li>
+              <li>• Protección de accesos</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="icon">🤖</div>
+            <h3>Automatización</h3>
+            <p>Procesos digitales que ahorran tiempo y reducen tareas repetitivas.</p>
+            <ul>
+              <li>• Formularios inteligentes</li>
+              <li>• Integraciones</li>
+              <li>• Flujos automatizados</li>
+              <li>• Herramientas internas</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="icon">☁️</div>
+            <h3>Infraestructura IT</h3>
+            <p>Configuración y despliegue de proyectos en entornos digitales modernos.</p>
+            <ul>
+              <li>• Hosting</li>
+              <li>• Dominios</li>
+              <li>• Cloud deployment</li>
+              <li>• Servidores</li>
+            </ul>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="icon">🧩</div>
+            <h3>Soporte Tecnológico</h3>
+            <p>Mantenimiento, optimización y solución de problemas técnicos.</p>
+            <ul>
+              <li>• Corrección de errores</li>
+              <li>• Mejoras de rendimiento</li>
+              <li>• Actualizaciones</li>
+              <li>• Consultoría técnica</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tecnologias">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Tecnologías y herramientas</h2>
+          <p>Trabajamos con tecnologías modernas para construir soluciones funcionales, seguras y escalables.</p>
+        </div>
+
+        <div class="tech-stack reveal">
+          <span class="tech-pill">HTML5</span>
+          <span class="tech-pill">CSS3</span>
+          <span class="tech-pill">JavaScript</span>
+          <span class="tech-pill">React</span>
+          <span class="tech-pill">Node.js</span>
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">PHP</span>
+          <span class="tech-pill">MySQL</span>
+          <span class="tech-pill">MongoDB</span>
+          <span class="tech-pill">GitHub</span>
+          <span class="tech-pill">Linux</span>
+          <span class="tech-pill">Cloud</span>
+          <span class="tech-pill">Cybersecurity</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="proceso">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Cómo trabajamos</h2>
+          <p>Un proceso claro para convertir una idea en una solución tecnológica real.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-card reveal">
+            <h3>Análisis</h3>
+            <p>Estudiamos tu necesidad, objetivos, público y tipo de solución requerida.</p>
+          </div>
+          <div class="process-card reveal">
+            <h3>Planificación</h3>
+            <p>Definimos estructura, tecnologías, funciones, diseño y alcance del proyecto.</p>
+          </div>
+          <div class="process-card reveal">
+            <h3>Desarrollo</h3>
+            <p>Construimos la solución usando buenas prácticas de código, diseño y seguridad.</p>
+          </div>
+          <div class="process-card reveal">
+            <h3>Pruebas</h3>
+            <p>Revisamos errores, velocidad, responsive design, compatibilidad y funcionamiento.</p>
+          </div>
+          <div class="process-card reveal">
+            <h3>Lanzamiento</h3>
+            <p>Publicamos el proyecto en dominio, hosting, servidor o plataforma cloud.</p>
+          </div>
+          <div class="process-card reveal">
+            <h3>Soporte</h3>
+            <p>Ofrecemos mantenimiento, actualizaciones, mejoras y asistencia técnica.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portafolio">
+      <div class="container">
+        <div class="section-header reveal">
+          <h2>Portafolio</h2>
+          <p>Algunos ejemplos de proyectos, demos y soluciones digitales desarrolladas.</p>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="portfolio-card reveal">
+            <div class="portfolio-img">Sabor Urbano</div>
+            <div class="portfolio-content">
+              <h3>Landing de restaurante</h3>
+              <p>Página moderna para negocio gastronómico con diseño visual atractivo.</p>
+              <a href="https://giowmccloud94-boop.github.io/sabor-urbano/" target="_blank" rel="noopener">Ver proyecto →</a>
+            </div>
+          </article>
+
+          <article class="portfolio-card reveal">
+            <div class="portfolio-img">Spiral Barbershop</div>
+            <div class="portfolio-content">
+              <h3>Web para barbería</h3>
+              <p>Diseño profesional para servicios, contacto y presencia digital local.</p>
+              <a href="https://giowmccloud94-boop.github.io/spiral-barbershop/" target="_blank" rel="noopener">Ver proyecto →</a>
+            </div>
+          </article>
+
+          <article class="portfolio-card reveal">
+            <div class="portfolio-img">VoiceOver</div>
+            <div class="portfolio-content">
+              <h3>Página para locución</h3>
+              <p>Sitio personal profesional con demo de voz, contacto y presentación.</p>
+              <a href="https://giowmccloud94-boop.github.io/Giow-Mccloud-VoiceOver-/" target="_blank" rel="noopener">Ver proyecto →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contacto">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2>¿Necesitas una solución tecnológica?</h2>
+          <p>
+            Hablemos de tu proyecto. Podemos ayudarte con páginas web, software, automatización, ciberseguridad, infraestructura o soporte tecnológico.
+          </p>
+          <div class="hero-actions" style="justify-content:center;">
+            <a class="btn btn-primary" href="https://wa.me/12729006527" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+            <a class="btn btn-secondary" href="mailto:giowmccloud94@gmail.com">Enviar correo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© <span id="year"></span> GiowDev Technologies. Todos los derechos reservados.</p>
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealOnScroll = () => {
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (elementTop < windowHeight - 80) {
+          element.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>
